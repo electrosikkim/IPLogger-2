@@ -21,7 +21,7 @@ db = firebase.database()
 app = Flask(__name__)
 @app.route("/")
 def index1():
-  return """Use http://urrl.herokuapp.com/gen/?url={your_url} to generate url"""
+  return """Use http://ipol-sik.herokuapp.com/gen/?url={your_url} to generate url"""
 
 @app.route("/<string:abbr>/")
 def index(abbr):
@@ -55,12 +55,12 @@ def shrtn():
     url = request.args.get("url")
     letters_and_digits = string.ascii_letters + string.digits
     result_str = ''.join((random.choice(letters_and_digits) for i in range(5)))
-    shrt = "http://urrl.herokuapp.com/" + result_str
+    shrt = "http://ipol-sik.herokuapp.com/" + result_str
     tra = "None"
     data = { "id": result_str, "original_url": url, "shortened_url":shrt, "track":tra}
     
     db.child(result_str).set(data)
-    result = {"url":"http://urrl.herokuapp.com/" + result_str}
+    result = {"url":"http://ipol-sik.herokuapp.com/" + result_str}
     return jsonify(result)
    
 @app.route('/track/<string:abbr>', methods=['GET'])
